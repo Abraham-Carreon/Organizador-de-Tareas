@@ -42,12 +42,60 @@ function agregarTweet(e)
     const materia = document.getElementById('materia').value;
     
     const datos = new Tarea(tweet, materia);
+
+    // Las alertas en caso de que no haya mensaje
+    const contAlert = document.getElementById('contAlert');
+    const Alerta = document.createElement('p');
+
+    if (tweet == '')
+    {
+
+        if (document.querySelector('#alerta'))
+        {
+            // Ya esta agregada la alerta de que no se ha escrito nada
+            // Si no la crea en el "else"
+            contAlert.style.display = 'block';
+        }
+
+        else
+        {
+
+     // Crea un contenedor y un parrafo para alertas
+    
+     Alerta.id = 'alerta';
+     Alerta.textContent = 'Ingresa alguna tarea a la casilla';
+    
+     // Agregar estilos
+     
+     Alerta.style.fontFamily = 'Arial';
+     Alerta.style.fontSize = '1.2em';
+     Alerta.style.textAlign = 'center';
+     Alerta.style.color = 'black';
+     Alerta.style.fontWeight = 'bolder';
+     Alerta.style.backgroundColor = '#E32636';
+     Alerta.style.border = 'black 5px';
+     Alerta.style.borderStyle = 'solid';
+     
+   
+     // Agrega la alerta a el area del DOM
+      contAlert.appendChild(Alerta);
+
+        }
+   
+
+    }
+
+    else
+    {
+    
+     // Elimina la alerta si estaba
+    contAlert.style.display = 'none'; 
     
     // Crear boton de eliminar
   
-    const boton = document.createElement('a');
-    boton.classList = 'borrar-tweet';
-    boton.textContent = 'X'; 
+      const boton = document.createElement('a');
+      boton.classList = 'borrar-tweet';
+      boton.textContent = 'X'; 
 
 
    
@@ -77,6 +125,9 @@ function agregarTweet(e)
   // Agregar a local storage
 
     agregarLocalStorage(datos);
+
+    }
+
     
    
 }
@@ -99,7 +150,8 @@ function borrarTweet(e)
     if ( e.target.className === 'borrar-tweet')
     {
         // Elimina la parte de borrar-tweet
-        
+        // Elimina la materia y la tarea
+        e.target.parentElement.parentElement.remove();
         e.target.parentElement.remove();
         borrarLocalStorage(e.target.parentElement.textContent);
     }
