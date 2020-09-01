@@ -2,6 +2,9 @@
 
 const ListaTweets = document.getElementById('lista-tweets');
 
+const colores = ['#A93226 ', '#CB4335', '#884EA0', '#7D3C98', '#2471A3', '#2E86C1', '#17A589', '#138D75', '#229954', '#28B463', '#D4AC0D', '#D68910', '#839192', '#707B7C'];
+
+
 // Events listeners
 
 eventListener();
@@ -15,6 +18,8 @@ function eventListener()
     // Borra las tareas
     ListaTweets.addEventListener('click',borrarTweet);
 
+    document.querySelector('#basura').addEventListener('click', borrarTodo);
+
     // Contenido cargado
     document.addEventListener('DOMContentLoaded',localStorageListo);
 }
@@ -26,22 +31,30 @@ function eventListener()
 
 class Tarea
 {
-    constructor(tarea,materia)
+    constructor(tarea,materia, color)
     {
         this.tarea = tarea;
         this.materia = materia;
+        this.color = color;
     }
+}
+
+function numeroAleatorio()
+{
+    return Math.round(Math.random() * colores.length);
 }
 
 function agregarTweet(e)
 {
     e.preventDefault();
     // Leer el valor 
-    
+    // Genera un numero en aleatorio para el color
+    const color = colores[ numeroAleatorio()];
+
     const tweet = document.getElementById('tweet').value;
     const materia = document.getElementById('materia').value;
     
-    const datos = new Tarea(tweet, materia);
+    const datos = new Tarea(tweet, materia, color);
 
     // Las alertas en caso de que no haya mensaje
     const contAlert = document.getElementById('contAlert');
@@ -105,6 +118,8 @@ function agregarTweet(e)
 
         const lista = document.createElement('ul');
         const barra = document.createElement('li');
+        // Agrega el color a la barra
+        barra.style.backgroundColor = color;
         barra.textContent = datos.materia;
         barra.className = 'materia';
     
@@ -177,6 +192,8 @@ function localStorageListo()
     // crear elemento y agregar a la lista
         const lista = document.createElement('ul');
         const barra = document.createElement('li');
+        // Agrega el color a la barra
+        barra.style.backgroundColor = tarea.color;
         barra.textContent = tarea.materia;
         barra.className = 'materia';
 
@@ -261,6 +278,42 @@ function borrarLocalStorage(tarea)
     // Modifica el local storage con los nuevos elementos
 
     localStorage.setItem('tarea', JSON.stringify(tareas));
+
+}
+
+
+// Borra todas las tareas
+function borrarTodo(e)
+{
+    e.preventDefault();
+    
+
+    // Se puede hacer algo parecido a esto para eliminar todo
+
+    /* 
+function removeAllChilds(a)
+ {
+ var a=document.getElementById(a);
+ while(a.hasChildNodes())
+	a.removeChild(a.firstChild);	
+ }
+ removeAllChilds('a');
+    
+    */
+
+    // Confirmar que se quiere eliminar todo
+
+
+    let borrar = confirm('¿Deseas eliminar todas las tareas?');
+    
+    if (borrar)
+    {
+        ListaTweets.innerHTML = '';
+        localStorage.clear(); 
+    }
+
+    
+    
 
 }
 
