@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Organizador de Tareas </title>
+    <title> Organizador de Tareas </title>  
     <link rel="stylesheet" href="assets/css/normalize.css">
     <link rel="stylesheet" href="assets/css/skeleton.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="icon" type="imagen/png" href="./assets/css/Logo.png">
 </head>
 <body>
@@ -15,28 +15,25 @@
     <div id="contenido">
         <div class="container">
 
-            <h1>Organizador de Tareas</h1>
+            <img id="git" src="./assets/img/icono_git.png" alt="Icono de Github" title="Abrir Github"> 
+            <h1> Organizador de Tareas </h1>
+            
             <div class="row">
                 <div class="six columns">
                     
                     <form action="option">
 
-                        <label for="materia">Materia:</label>
-                        <select id="materia">
-                            <option value="Comprensión y Expresión Lingüística"> Comprensión y Expresión Lingüística</option>
-                            <option value="Elección Vocacional"> Elección Vocacional </option>
-                            <option value="La Mecánica y el Entorno"> La Mecánica y el Entorno </option>
-                            <option value="La Naturaleza de la Vida"> La Naturaleza de la Vida </option>
-                            <option value="Estudio del Cambio"> Estudio del Cambio </option>
-                            <option value="Temas Selectos de Química"> Temas Selectos de Química </option>
-                            <option value="Sistemas de Calidad"> Sistemas de Calidad </option>
-                            <option value="Análisis y Diseño de Sistemas"> Análisis y Diseño de Sistemas </option>
-                            <option value="Base de Datos I"> Base de Datos I </option>
-                            <option value="Desarrollo Visual I"> Desarrollo Visual I </option> 
-                            <option value="Desarrollo Web II"> Desarrollo Web II </option>
-                            <option value="Seguridad en Informática y Laboratorio II"> Seguridad en Informática II </option>
-                        </select>
+                        <label id="forma" style="display: inline-block;" for="materia">Materia:</label>
+
+                          <p class="botones" title="Agregar materia" id="agregar-mat">+</p>
+                          <a id="editar" title="Eliminar alguna materia"> Editar </a>
                         
+                          <div id="agregar-materias"></div>
+
+                          <select style="display: block;"  id="materia">
+                                         
+                          </select>
+              
                      <div id="contAlert"> </div>    
                     </form>
 
@@ -49,7 +46,7 @@
                    
                 </div>
                 <div class="six columns">
-                    <img style="height: 50px; width: 60px; display: flex; margin: 0 auto 0; " src="/assets/img/basura.png" alt="Una basura" title="Eliminar todas las tareas" id="basura">
+                    <img style="height: 50px; width: 60px; display: flex; margin: 0 auto 0; cursor: pointer; " src="assets/img/basura.png" alt="Una basura" title="Eliminar todas las tareas" id="basura">
                     <br>
                     <h2>Tareas</h2>
                     <div id="lista-tweets"></div>
