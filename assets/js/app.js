@@ -86,7 +86,7 @@ function agregarMateria(e)
    // El boton principal se quita 
    botonAgregarMat.style.display = 'none';
     // Estilos del nuevo boton
-   nuevoBoton.textContent = '+';
+   nuevoBoton.textContent = 'Agregar';
    nuevoBoton.className = 'botones';
    nuevoBoton.id = 'agregar-mat';
    nuevoBoton.title = 'Presiona para agregar';
