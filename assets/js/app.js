@@ -4,6 +4,8 @@
 // No se pueden importar modulos estando en local.
 // Volver a traer todo el codigo a esta hoja.
 
+import {borrarTodo} from './borrar.js';
+
 // Select para agregar las materias 
 const selectMaterias = document.getElementById('materia');
 
@@ -11,10 +13,10 @@ const botonEditar = document.getElementById('editar');
 
 // Variables
 
-const ListaTweets = document.getElementById('lista-tweets');
+export const ListaTweets = document.getElementById('lista-tweets');
 
 // La lista de colores para los fondos
-const colores = ['#A93226 ', '#CB4335', '#884EA0', '#7D3C98', '#2471A3', '#2E86C1', '#17A589', '#138D75', '#229954', '#28B463', '#D4AC0D', '#D68910', '#839192', '#707B7C'];
+const colores = ['#A93226 ', '#CB4335', '#884EA0', '#7D3C98', '#2471A3', '#2E86C1', '#17A589', '#138D75', '#229954', '#28B463', '#D4AC0D', '#D68910', '#839192', '#707B7C', '#ECD078', '#D95B43', '#C02942', '#542437', '#53777A', '#556270', '#4ECDC4', '#C7F464', '#FF6B6B', '#C44D58'];
 
 // Events listeners
 
@@ -30,6 +32,11 @@ function eventListener()
     document.querySelector('#formulario').addEventListener('submit',agregarTweet);
     // Cuando envia el formulario elimina su contenido 
     document.querySelector('#formulario').addEventListener('submit',eliminarCont);
+
+    // Editar la tarea
+
+    ListaTweets.addEventListener('click', editarTarea);
+
     // Borra las tareas
     ListaTweets.addEventListener('click', borrarTweet);
 
@@ -48,6 +55,7 @@ function eventListener()
     // Agregar materias
     document.querySelector('#agregar-mat').addEventListener('click', agregarMateria);
 
+
 }
 
 // Funcion
@@ -64,8 +72,8 @@ class Tarea
 }
 
 function numeroAleatorio()
-{
-    return Math.round(Math.random() * colores.length);
+{    
+    return Math.round(Math.random() * (colores.length -1) );
 }
 
 
@@ -100,6 +108,7 @@ function agregarMateria(e)
    cuadroMateria.style.display = 'inline-block';
    cuadroMateria.className = 'u-full-width';
    cuadroMateria.title = 'Agrega la materia deseada';
+   cuadroMateria.placeholder = 'Ingresa la materia';
    
    // Agrega el cuadro para agregar la materia
    cuadroAgregar.appendChild(cuadroMateria);     
@@ -368,10 +377,18 @@ function agregarTweet(e)
 
         const lista = document.createElement('ul');
         const barra = document.createElement('li');
+        const editar = document.createElement('img');
+
+        // Propiedades de la imagen
+        editar.src = '/assets/img/editar.png';
+        editar.title = 'Editar la tarea';
+        editar.className = 'editarIco';
+
         // Agrega el color a la barra
         barra.style.backgroundColor = color;
         barra.textContent = datos.materia;
         barra.className = 'materia';
+        barra.appendChild(editar);
     
         const li = document.createElement('li');
         li.className = 'tarea';
@@ -531,38 +548,40 @@ function borrarLocalStorage(tarea)
 
 }
 
+// Edita las tareas ya agregadas
 
-// Borra todas las tareas
-function borrarTodo(e)
+function editarTarea(e)
 {
     e.preventDefault();
+    // Sirve para agregar la tarea a editar al form de agregar
     
 
-    // Se puede hacer algo parecido a esto para eliminar todo
-
-    /* 
-function removeAllChilds(a)
- {
- var a=document.getElementById(a);
- while(a.hasChildNodes())
-	a.removeChild(a.firstChild);	
- }
- removeAllChilds('a');
-    
-    */
-
-    // Confirmar que se quiere eliminar todo
-
-
-    let borrar = confirm('¿Deseas eliminar todas las tareas?');
-    
-    if (borrar)
+    if (e.target.className == 'editarIco')
     {
-        ListaTweets.innerHTML = '';
-        //localStorage.clear(); 
-        localStorage.removeItem('tarea');
+        // Traversing a la tarea
+        //console.log(e.target.parentElement.nextSibling);   
+
+        // Guarda la tarea del click
+        let tarea = e.target.parentElement.nextSibling.textContent;
+        // Guarda la tarea para pasarla al input(elimina la X de eliminar)
+        const tareaEditar = tarea.substring(0, tarea.length -1 );
+        // Obtiene en formulario 
+        let formTarea = document.getElementById('tweet');
+        // Pone la tarea en el formulario
+        formTarea.value = tareaEditar;
+        
+        // Elimina de la lista la materia y tarea
+        e.target.parentElement.parentElement.remove();
+        e.target.parentElement.remove();
+
+        // Borra la tarea del localStorage
+        borrarLocalStorage(tarea);
+
     }
-   
+    
+
 }
+
+
 
 
