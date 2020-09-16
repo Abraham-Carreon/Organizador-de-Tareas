@@ -55,6 +55,9 @@ function eventListener()
     // Agregar materias
     document.querySelector('#agregar-mat').addEventListener('click', agregarMateria);
 
+    // Editar tareas
+
+    ListaTweets.addEventListener('click', editarTarea);
 
 }
 
@@ -380,7 +383,7 @@ function agregarTweet(e)
         const editar = document.createElement('img');
 
         // Propiedades de la imagen
-        editar.src = '/assets/img/editar.png';
+        editar.src = './assets/img/editar.png';
         editar.title = 'Editar la tarea';
         editar.className = 'editarIco';
 
@@ -459,11 +462,19 @@ function localStorageListo()
     // crear elemento y agregar a la lista
         const lista = document.createElement('ul');
         const barra = document.createElement('li');
+        const editar = document.createElement('img');
+
+        // Propiedades de la imagen
+        editar.src = './assets/img/editar.png';
+        editar.title = 'Editar la tarea';
+        editar.className = 'editarIco';
+        
         // Agrega el color a la barra
         barra.style.backgroundColor = tarea.color;
         barra.textContent = tarea.materia;
         barra.className = 'materia';
-        
+        barra.appendChild(editar);
+
         const li = document.createElement('li');
         li.textContent = tarea.tarea;
         li.className = 'tarea';
