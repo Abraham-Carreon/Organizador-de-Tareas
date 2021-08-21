@@ -27,34 +27,28 @@ export function agregarTweet(e)
 
         else
         {
+            // Crea un contenedor y un parrafo para alertas
+            Alerta.id = 'alerta';
+            Alerta.textContent = 'No se ingreso ninguna tarea o no existen materias.';
 
-     // Crea un contenedor y un parrafo para alertas
-     Alerta.id = 'alerta';
-     Alerta.textContent = 'No se ingreso ninguna tarea o no existen materias.';   
-
-     // Agrega la alerta a el area del DOM
-      contAlert.appendChild(Alerta);
-
+            // Agrega la alerta a el area del DOM
+            contAlert.appendChild(Alerta);
         }
-   
-
     }
 
     else
     {
-    
-     // Elimina la alerta si estaba
-    contAlert.style.display = 'none'; 
-    
-    // Crear boton de eliminar
-  
-      const boton = document.createElement('a');
-      boton.classList = 'borrar-tweet';
-      boton.textContent = 'X'; 
 
+        // Elimina la alerta si estaba
+        contAlert.style.display = 'none'; 
+    
+        // Crear boton de eliminar
+    
+        const boton = document.createElement('a');
+        boton.classList = 'borrar-tweet';
+        boton.textContent = 'X'; 
 
-   
-    // crear elemento y agregar a la lista
+        // Crear elemento y agregar a la lista
 
         // Crea la barra de las materias
 
@@ -89,16 +83,12 @@ export function agregarTweet(e)
         lista.appendChild(barra);
         lista.appendChild(li);
         ListaTweets.appendChild(lista);
-        
-    
+            
+        // Agregar a local storage
 
-  // Agregar a local storage
-
-    agregarLocalStorage(datos);
+        agregarLocalStorage(datos);
     
     }
-
-      
 }
 
 
@@ -116,9 +106,6 @@ export function borrarTweet(e)
         
         borrarLocalStorage(e.target.parentElement.textContent);
     }
-
-   // console.log("Diste click en la lista");
-
 }
 
 // Mostrar los datos de local storage
@@ -130,12 +117,12 @@ export function localStorageListo()
 
     tareas.forEach(function(tarea) 
     {
-    const boton = document.createElement('a');
-    boton.classList = 'borrar-tweet';
-    boton.textContent = 'X'; 
 
-   
-    // crear elemento y agregar a la lista
+        const boton = document.createElement('a');
+        boton.classList = 'borrar-tweet';
+        boton.textContent = 'X'; 
+        
+        // crear elemento y agregar a la lista
         const lista = document.createElement('ul');
         const barra = document.createElement('li');
         const editar = document.createElement('img');
@@ -150,7 +137,6 @@ export function localStorageListo()
         minimizar.src = './assets/img/triangulo.png'
         minimizar.title = 'Minimizar tarea';
         minimizar.className = 'minimizar';
-     
         
         // Agrega el color a la barra
         barra.style.backgroundColor = tarea.color;
@@ -170,15 +156,10 @@ export function localStorageListo()
         lista.appendChild(barra);
         lista.appendChild(li);
     
-        ListaTweets.appendChild(lista);
-        
-        //ListaTweets.appendChild(barra);
-        //ListaTweets.appendChild(li);
+        ListaTweets.appendChild(lista);                
 
-    });
+    })
 }
-
-
 
 // Agrega el tweet al localstorage
 
@@ -194,7 +175,6 @@ export function agregarLocalStorage(tweet)
 
     // Convertir a arreglo y ponerlo a local storage
     localStorage.setItem('tarea', JSON.stringify(tweets));
-
 }
 
 // Comprueba que haya elementos en localstorage y retorna un arreglo
@@ -212,7 +192,6 @@ export function obtenertweets()
     else
     {
         tweets = JSON.parse(localStorage.getItem('tarea'));
-        
     }
 
     return tweets;
@@ -250,23 +229,6 @@ export function borrarLocalStorage(tarea)
 export function borrarTodo(e)
 {
     e.preventDefault();
-    
-
-    // Se puede hacer algo parecido a esto para eliminar todo
-
-    /* 
-function removeAllChilds(a)
- {
- var a=document.getElementById(a);
- while(a.hasChildNodes())
-	a.removeChild(a.firstChild);	
- }
- removeAllChilds('a');
-    
-    */
-
-    // Confirmar que se quiere eliminar todo
-
 
     let borrar = confirm('¿Deseas eliminar todas las tareas?');
     
@@ -276,5 +238,4 @@ function removeAllChilds(a)
         //localStorage.clear(); 
         localStorage.removeItem('tarea');
     }
-   
 }

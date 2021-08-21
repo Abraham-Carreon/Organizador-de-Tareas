@@ -81,5 +81,3 @@ export function numeroAleatorio()
 {    
     return Math.round(Math.random() * (colores.length -1) );
 }
-
-
