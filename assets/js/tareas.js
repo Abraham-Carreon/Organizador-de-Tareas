@@ -117,7 +117,6 @@ export function localStorageListo()
 
     tareas.forEach(function(tarea) 
     {
-
         const boton = document.createElement('a');
         boton.classList = 'borrar-tweet';
         boton.textContent = 'X'; 
@@ -157,7 +156,6 @@ export function localStorageListo()
         lista.appendChild(li);
     
         ListaTweets.appendChild(lista);                
-
     })
 }
 
@@ -216,14 +214,11 @@ export function borrarLocalStorage(tarea)
             tareas.splice(i, 1);
         }
     });
-    // Modifica el local storage con los nuevos elementos
 
+    // Modifica el local storage con los nuevos elementos
     localStorage.setItem('tarea', JSON.stringify(tareas));
 
 }
-
-
-
 
 // Borra todas las tareas
 export function borrarTodo(e)
@@ -234,8 +229,7 @@ export function borrarTodo(e)
     
     if (borrar)
     {
-        ListaTweets.innerHTML = '';
-        //localStorage.clear(); 
+        ListaTweets.innerHTML = '';        
         localStorage.removeItem('tarea');
     }
 }
