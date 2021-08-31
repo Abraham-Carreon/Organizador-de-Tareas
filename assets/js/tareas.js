@@ -10,7 +10,7 @@ export function agregarTweet(e)
 
     const tweet = document.getElementById('tweet').value;
     const materia = document.getElementById('materia').value;
-    const datos = new Tarea(tweet, materia, color);
+    const datos = new Tarea(tweet, materia, color, 0);
     // Las alertas en caso de que no haya mensaje
     const contAlert = document.getElementById('contAlert');
     const Alerta = document.createElement('p');
@@ -63,9 +63,8 @@ export function agregarTweet(e)
         editar.className = 'editarIco';
 
         // Propiedades de la imagen
-        minimizar.src = './assets/img/triangulo.png'
-        minimizar.title = 'Minimizar tarea';
-        minimizar.className = 'minimizar';
+        minimizar.src = './assets/img/triangulo.png'        
+        minimizar.setAttribute("estado", datos.estado);        
 
         // Agrega el color a la barra
         barra.style.backgroundColor = color;
@@ -79,6 +78,23 @@ export function agregarTweet(e)
         li.textContent = datos.tarea;
         // Añade el boton de borrar al tweet
         li.appendChild(boton);
+
+        if (datos.estado == '0') {
+            minimizar.title = "Maximiza la tarea";
+            console.log(minimizar.nextElementSibling)
+            li.style.display = "none";
+            minimizar.classList.remove('minimizar');
+            minimizar.classList.add('maximizar');
+            minimizar.setAttribute("estado", 1);
+        } else if (datos.estado == '1') {
+            minimizar.title = "Minimiza la tarea";
+            console.log(minimizar.children)
+            li.style.display = "block";            
+            minimizar.classList.remove('maximizar');
+            minimizar.classList.add('minimizar');
+            minimizar.setAttribute("estado", 0);
+        }
+
         // Añade ls tarea a la lista
         lista.appendChild(barra);
         lista.appendChild(li);
@@ -86,8 +102,7 @@ export function agregarTweet(e)
             
         // Agregar a local storage
 
-        agregarLocalStorage(datos);
-    
+        agregarLocalStorage(datos);   
     }
 }
 
@@ -133,9 +148,7 @@ export function localStorageListo()
         editar.className = 'editarIco';
 
         // Propiedades de la imagen
-        minimizar.src = './assets/img/triangulo.png'
-        minimizar.title = 'Minimizar tarea';
-        minimizar.className = 'minimizar';
+        minimizar.src = './assets/img/triangulo.png'       
         
         // Agrega el color a la barra
         barra.style.backgroundColor = tarea.color;
@@ -150,6 +163,21 @@ export function localStorageListo()
         // Añade el boton de borrar al tweet
         li.appendChild(boton);
 
+        if (tarea.estado == '0') {
+            minimizar.title = "Maximiza la tarea";
+            console.log(minimizar.nextElementSibling)
+            li.style.display = "none";
+            minimizar.classList.remove('minimizar');
+            minimizar.classList.add('maximizar');
+            minimizar.setAttribute("estado", 1);
+        } else if (tarea.estado == '1') {
+            minimizar.title = "Minimiza la tarea";
+            console.log(minimizar.children)
+            li.style.display = "block";            
+            minimizar.classList.remove('maximizar');
+            minimizar.classList.add('minimizar');
+            minimizar.setAttribute("estado", 0);
+        }
 
         // Añade el tweet a la lista
         lista.appendChild(barra);
@@ -167,8 +195,7 @@ export function agregarLocalStorage(tweet)
 
     tweets = obtenertweets();
 
-    // Añadir el nuevo tweet
-   // console.log(tweets);
+    // Añade la nueva tarea
     tweets.push(tweet);
 
     // Convertir a arreglo y ponerlo a local storage

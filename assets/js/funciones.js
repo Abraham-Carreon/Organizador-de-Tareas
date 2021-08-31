@@ -72,8 +72,7 @@ export function agregarMaterias(materia) {
 
     materias = obtenerMaterias();
 
-    // Añadir el nuevo tweet
-    // console.log(tweets);
+    // Añade la nueva materia
     materias.push(materia);
 
     // Convertir a arreglo y ponerlo a local storage
@@ -205,10 +204,6 @@ export function eliminarMaterias(e) {
     }
 }
 
-
-
-
-
 // Eliminar contenido del formulario despues de hacer click 
 
 export function eliminarCont(tarea) {
@@ -250,15 +245,18 @@ export function editarTarea(e) {
 export function desplegar(e) {
     e.preventDefault();
     // Depende de la condicion, despliega o miniminiza la tarea
-    if (e.target.className == 'minimizar') {
+    let estado = e.target.getAttribute("estado")
+    if (estado == '0') {
         e.target.title = "Maximiza la tarea";
         e.target.parentElement.nextSibling.style.display = 'none';
         e.target.classList.remove('minimizar');
         e.target.classList.add('maximizar');
-    } else if (e.target.className == 'maximizar') {
+        e.target.setAttribute("estado", 1);
+    } else if (estado == '1') {
         e.target.title = "Minimiza la tarea";
         e.target.parentElement.nextSibling.style.display = 'block';
         e.target.classList.remove('maximizar');
         e.target.classList.add('minimizar');
+        e.target.setAttribute("estado", 0);
     }
 }
