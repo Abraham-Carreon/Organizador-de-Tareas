@@ -69,10 +69,11 @@ function eventListener()
 // Tweet del formulario
 export class Tarea
 {
-    constructor(tarea,materia, color, estado)
+    constructor(tarea,materia, fecha, color, estado)
     {
         this.tarea = tarea;
         this.materia = materia;
+        this.fecha = fecha;
         this.color = color;
         this.estado = estado;
     }

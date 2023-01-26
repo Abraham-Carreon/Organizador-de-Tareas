@@ -111,7 +111,6 @@ export function insertarMaterias() {
 
 }
 
-
 export function editarMaterias() {
     const cuadroEditar = document.querySelector('#agregar-materias');
     const lista = document.createElement('ul');
@@ -190,7 +189,6 @@ export function borrarLocalStorageMaterias(materia) {
     location.reload();
 }
 
-
 export function eliminarMaterias(e) {
     e.preventDefault();
 
@@ -213,7 +211,6 @@ export function eliminarCont(tarea) {
     document.getElementById('tweet').value = "";
 }
 
-
 // Edita las tareas ya agregadas
 
 export function editarTarea(e) {
@@ -223,7 +220,6 @@ export function editarTarea(e) {
     if (e.target.className == 'editarIco') {
         // Traversing a la tarea
         //console.log(e.target.parentElement.nextSibling);   
-
         // Guarda la tarea del click
         let tarea = e.target.parentElement.nextSibling.textContent;
         // Guarda la tarea para pasarla al input(elimina la X de eliminar)
@@ -249,12 +245,14 @@ export function desplegar(e) {
     if (estado == '0') {
         e.target.title = "Maximiza la tarea";
         e.target.parentElement.nextSibling.style.display = 'none';
+        e.target.parentElement.nextSibling.nextSibling.style.display = 'none';
         e.target.classList.remove('minimizar');
         e.target.classList.add('maximizar');
         e.target.setAttribute("estado", 1);
     } else if (estado == '1') {
         e.target.title = "Minimiza la tarea";
         e.target.parentElement.nextSibling.style.display = 'block';
+        e.target.parentElement.nextSibling.nextSibling.style.display = 'block';
         e.target.classList.remove('maximizar');
         e.target.classList.add('minimizar');
         e.target.setAttribute("estado", 0);

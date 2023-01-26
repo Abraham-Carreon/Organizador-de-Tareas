@@ -10,7 +10,8 @@ export function agregarTweet(e)
 
     const tweet = document.getElementById('tweet').value;
     const materia = document.getElementById('materia').value;
-    const datos = new Tarea(tweet, materia, color, 0);
+    const fecha = document.getElementById("fechaEntrega").value;
+    const datos = new Tarea(tweet, materia, fecha, color, 0);
     // Las alertas en caso de que no haya mensaje
     const contAlert = document.getElementById('contAlert');
     const Alerta = document.createElement('p');
@@ -72,7 +73,12 @@ export function agregarTweet(e)
         barra.className = 'materia';
         barra.appendChild(editar);
         barra.appendChild(minimizar);
-    
+
+        // Crea el apartado de la fecha
+        const lf = document.createElement('li');
+        lf.className = "tarea";
+        lf.textContent = datos.fecha;
+
         const li = document.createElement('li');
         li.className = 'tarea';
         li.textContent = datos.tarea;
@@ -83,13 +89,15 @@ export function agregarTweet(e)
             minimizar.title = "Maximiza la tarea";
             console.log(minimizar.nextElementSibling)
             li.style.display = "none";
+            lf.style.display = "none";
             minimizar.classList.remove('minimizar');
             minimizar.classList.add('maximizar');
             minimizar.setAttribute("estado", 1);
         } else if (datos.estado == '1') {
             minimizar.title = "Minimiza la tarea";
             console.log(minimizar.children)
-            li.style.display = "block";            
+            li.style.display = "block";
+            lf.style.display = "block";           
             minimizar.classList.remove('maximizar');
             minimizar.classList.add('minimizar');
             minimizar.setAttribute("estado", 0);
@@ -97,6 +105,7 @@ export function agregarTweet(e)
 
         // Añade ls tarea a la lista
         lista.appendChild(barra);
+        lista.appendChild(lf);
         lista.appendChild(li);
         ListaTweets.appendChild(lista);
             
@@ -160,6 +169,11 @@ export function localStorageListo()
         const li = document.createElement('li');
         li.textContent = tarea.tarea;
         li.className = 'tarea';
+
+        const lf = document.createElement('li');
+        lf.textContent = tarea.fecha;
+        lf.className = 'tarea';
+
         // Añade el boton de borrar al tweet
         li.appendChild(boton);
 
@@ -167,13 +181,15 @@ export function localStorageListo()
             minimizar.title = "Maximiza la tarea";
             console.log(minimizar.nextElementSibling)
             li.style.display = "none";
+            lf.style.display = "none";
             minimizar.classList.remove('minimizar');
             minimizar.classList.add('maximizar');
             minimizar.setAttribute("estado", 1);
         } else if (tarea.estado == '1') {
             minimizar.title = "Minimiza la tarea";
             console.log(minimizar.children)
-            li.style.display = "block";            
+            li.style.display = "block";
+            lf.style.display = "block";     
             minimizar.classList.remove('maximizar');
             minimizar.classList.add('minimizar');
             minimizar.setAttribute("estado", 0);
@@ -181,8 +197,8 @@ export function localStorageListo()
 
         // Añade el tweet a la lista
         lista.appendChild(barra);
+        lista.appendChild(lf);
         lista.appendChild(li);
-    
         ListaTweets.appendChild(lista);                
     })
 }
