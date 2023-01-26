@@ -191,3 +191,8 @@ textarea
     height: 30px;
     transform: rotate(360deg);
 }
+
+.hora
+{
+    font-weight: bolder;
+}

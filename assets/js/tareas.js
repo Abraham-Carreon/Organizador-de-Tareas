@@ -10,7 +10,10 @@ export function agregarTweet(e)
 
     const tweet = document.getElementById('tweet').value;
     const materia = document.getElementById('materia').value;
-    const fecha = document.getElementById("fechaEntrega").value;
+    let fecha = document.getElementById("fechaEntrega").value;
+    
+    //Se obtiene la fecha del formulario o se agrega la de hoy por defecto, una parte se obtuvo por chatgpt
+    fecha == "" ?  fecha = `${String(new Date().getDate()).padStart(2, '0')} - ${new Date().getMonth()+1} - ${new Date().getFullYear()}`: fecha=`${String(new Date(fecha).getDate()+1).padStart(0, '0')} - ${String(new Date(fecha).getMonth() + 1).padStart(2, '0')} - ${new Date(fecha).getFullYear()}`;
     const datos = new Tarea(tweet, materia, fecha, color, 0);
     // Las alertas en caso de que no haya mensaje
     const contAlert = document.getElementById('contAlert');
@@ -78,6 +81,7 @@ export function agregarTweet(e)
         const lf = document.createElement('li');
         lf.className = "tarea";
         lf.textContent = datos.fecha;
+        lf.classList.add("hora");
 
         const li = document.createElement('li');
         li.className = 'tarea';
@@ -87,7 +91,6 @@ export function agregarTweet(e)
 
         if (datos.estado == '0') {
             minimizar.title = "Maximiza la tarea";
-            console.log(minimizar.nextElementSibling)
             li.style.display = "none";
             lf.style.display = "none";
             minimizar.classList.remove('minimizar');
@@ -95,7 +98,6 @@ export function agregarTweet(e)
             minimizar.setAttribute("estado", 1);
         } else if (datos.estado == '1') {
             minimizar.title = "Minimiza la tarea";
-            console.log(minimizar.children)
             li.style.display = "block";
             lf.style.display = "block";           
             minimizar.classList.remove('maximizar');
@@ -173,13 +175,12 @@ export function localStorageListo()
         const lf = document.createElement('li');
         lf.textContent = tarea.fecha;
         lf.className = 'tarea';
-
+        lf.classList.add("hora");
         // Añade el boton de borrar al tweet
         li.appendChild(boton);
 
         if (tarea.estado == '0') {
             minimizar.title = "Maximiza la tarea";
-            console.log(minimizar.nextElementSibling)
             li.style.display = "none";
             lf.style.display = "none";
             minimizar.classList.remove('minimizar');
@@ -187,7 +188,6 @@ export function localStorageListo()
             minimizar.setAttribute("estado", 1);
         } else if (tarea.estado == '1') {
             minimizar.title = "Minimiza la tarea";
-            console.log(minimizar.children)
             li.style.display = "block";
             lf.style.display = "block";     
             minimizar.classList.remove('maximizar');

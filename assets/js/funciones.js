@@ -221,7 +221,7 @@ export function editarTarea(e) {
         // Traversing a la tarea
         //console.log(e.target.parentElement.nextSibling);   
         // Guarda la tarea del click
-        let tarea = e.target.parentElement.nextSibling.textContent;
+        let tarea = e.target.parentElement.nextSibling.nextSibling.textContent;
         // Guarda la tarea para pasarla al input(elimina la X de eliminar)
         const tareaEditar = tarea.substring(0, tarea.length - 1);
         // Obtiene en formulario 
