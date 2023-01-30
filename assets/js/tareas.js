@@ -62,12 +62,12 @@ export function agregarTweet(e)
         const minimizar = document.createElement('img');
 
         // Propiedades de la imagen
-        editar.src = '/assets/img/editar.png';
+        editar.src = './assets/img/editar.png';
         editar.title = 'Editar la tarea';
         editar.className = 'editarIco';
 
         // Propiedades de la imagen
-        minimizar.src = '/assets/img/triangulo.png'        
+        minimizar.src = './assets/img/triangulo.png'        
         minimizar.setAttribute("estado", datos.estado);        
 
         // Agrega el color a la barra
@@ -154,12 +154,12 @@ export function localStorageListo()
         const minimizar = document.createElement('img');
 
         // Propiedades de la imagen
-        editar.src = '/assets/img/editar.png';
+        editar.src = './assets/img/editar.png';
         editar.title = 'Editar la tarea';
         editar.className = 'editarIco';
 
         // Propiedades de la imagen
-        minimizar.src = '/assets/img/triangulo.png'       
+        minimizar.src = './assets/img/triangulo.png'       
         
         // Agrega el color a la barra
         barra.style.backgroundColor = tarea.color;
